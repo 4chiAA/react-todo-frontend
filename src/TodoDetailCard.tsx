@@ -15,6 +15,7 @@ export default function TodoDetailCard(props:TodoDetailCardProps){
             <h3>Details:</h3>
             <p>{foundTodo?.description}</p>
             <p>{foundTodo?.status}</p>
+            <button><Link to={"/todos/"}>Back</Link></button>
             <button><Link to={"/todos/"+foundTodo?.id+"/update"}>Edit To-do</Link></button>
         </>
     )

@@ -24,7 +24,6 @@ export default function TodoCreater(props:TodoCreatorProps) {
     }
 
 
-
     return (
         <>
         <h3>Create your To-do</h3>

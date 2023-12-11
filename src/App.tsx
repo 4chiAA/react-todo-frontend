@@ -8,6 +8,7 @@ import Welcome from "./Welcome.tsx";
 import TodoGallery from "./TodoGallery.tsx";
 import TodoCreater from "./TodoCreater.tsx";
 import TodoDetailCard from "./TodoDetailCard.tsx";
+import TodoUpdater from "./TodoUpdater.tsx";
 
 function App() {
 
@@ -24,12 +25,16 @@ function App() {
             .catch((error) => alert(error.message))
     }
 
-    /*
-    function updateTodoById():void {
-        axios.put(baseURL+todos.findIndex(id))
+    function updateTodoById(updatedTodo:Todo):void {
+        axios.put(baseURL+"/:id/update", updatedTodo)
+            .then((response) => {
+                alert("To-do wurde geändert zu: \"" + response.data.description);
+                fetchAllTodos();
+            })
+            .catch((error) => alert(error.message))
     }
 
-     */
+
 
     function createTodo(newTodo:Todo) {
         axios.post<Todo>(baseURL, newTodo)
@@ -41,12 +46,14 @@ function App() {
     }
 
 
+
   return (
     <>
       <TodoHeader/>
       <Routes>
           <Route path={"/"} element={<Welcome/>}/>
           <Route path={"/todos/:id"} element={<TodoDetailCard todos={todos}/>}/>
+          <Route path={"/todos/:id/update"} element={<TodoUpdater todos={todos} updateTodo={updateTodoById}/>}/>
           <Route path={"/todos"} element={<TodoGallery todos={todos}/>}/>
           <Route path={"/addtodo"} element={<TodoCreater addTodo={createTodo}/>}/>
       </Routes>
